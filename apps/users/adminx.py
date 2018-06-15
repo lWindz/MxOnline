@@ -4,6 +4,24 @@
 # @create: 2018/6/12 下午3:42
 import xadmin
 from users.models import EmailVerifyRecord, Banner
+from xadmin import views
+
+
+class BaseSetting(object):
+    enable_themes = True
+    use_bootswatch = True
+
+
+xadmin.site.register(views.BaseAdminView, BaseSetting)
+
+
+class GlobalSettings(object):
+    site_title = u'MX后台管理系统'
+    site_footer = u'MX在线网'
+    menu_style = 'accordion'
+
+
+xadmin.site.register(views.CommAdminView, GlobalSettings)
 
 
 class EmailVerifyRecordAdmin(object):

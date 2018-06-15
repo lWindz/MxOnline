@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 """
 Django settings for MxOnline project.
 
@@ -31,6 +32,10 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+AUTHENTICATION_BACKENDS = (
+    'users.views.CustomBackend',
+)
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,7 +48,8 @@ INSTALLED_APPS = [
     'organization',
     'operation',
     'xadmin',
-    'crispy_forms'
+    'crispy_forms',
+    'captcha',
 ]
 AUTH_USER_MODEL = 'users.UserProfile'
 
@@ -132,3 +138,24 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+# 邮件配置
+# EMAIL_HOST = 'smtp.sina.com'
+# EMAIL_HOST_USER = 'projectsedu@sina.com'
+# EMAIL_PORT = 25
+# EMAIL_HOST_PASSWORD = 'admin123'
+# EMAIL_USE_TLS = False
+
+
+EMAIL_HOST = 'smtp.126.com'
+EMAIL_HOST_USER = 'hanz168@126.com'
+EMAIL_PORT = 25
+EMAIL_HOST_PASSWORD = 'gTVX0q30ODQnQlkF'
+EMAIL_FROM = 'hanz168@126.com'
+EMAIL_USE_TLS = False
