@@ -1,3 +1,5 @@
+# -*- coding:utf-8 -*-
+
 """MxOnline URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -19,7 +21,7 @@ from django.views.generic import TemplateView
 import xadmin
 
 # from users.views import user_login
-from users.views import LoginView, RegisterView
+from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
@@ -28,4 +30,11 @@ urlpatterns = [
     url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^register/$', RegisterView.as_view(), name='register'),
     url(r'^captcha/', include('captcha.urls')),
+    # 配置url提取变量,调用激活用户接口
+    url(r'^active/(?P<active_code>.*)/$', ActiveUserView.as_view(), name='user_active'),
+    url(r'^forget/$', ForgetPwdView.as_view(), name='forget_pwd'),
+    # 配置url提取变量,调用密码找回接口
+    url(r'^reset/(?P<reset_code>.*)/$', ResetView.as_view(), name='reset_pwd'),
+    url(r'^modify_pwd/$', ModifyPwdView.as_view(), name='modify_pwd'),
+
 ]

@@ -32,6 +32,8 @@ class EmailVerifyRecord(models.Model):
     send_type = models.CharField(max_length=10, choices=(('register', u'注册'), ('forget', u'找回密码')),
                                  verbose_name=u'验证码类型')
     send_time = models.DateTimeField(default=datetime.now, verbose_name=u'发送时间')
+    # 记录邮件验证码是否失效
+    used = models.IntegerField(default=0, verbose_name=u'验证码是否过期')
 
     class Meta:
         verbose_name = u'邮箱验证码'
