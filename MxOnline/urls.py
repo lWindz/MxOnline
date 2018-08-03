@@ -39,9 +39,10 @@ urlpatterns = [
     # 配置url提取变量,调用密码找回接口
     url(r'^reset/(?P<reset_code>.*)/$', ResetView.as_view(), name='reset_pwd'),
     url(r'^modify_pwd/$', ModifyPwdView.as_view(), name='modify_pwd'),
-    # 课程机构首页
-    url(r'^org_list/$', OrgView.as_view(), name='org_list'),
 
-    # 配置上传文件的访问处理函数
+    # 课程机构url配置
+    url(r'^org/', include('organization.urls', namespace='org')),
+
+    # 配置上传文件的访问处理函数,media媒体文件路径
     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
 ]
