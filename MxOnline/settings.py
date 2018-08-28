@@ -80,6 +80,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # django1.9之前路径
+                # 'django.core.context_processors.media',
+                # djano1.9之后路径
                 'django.template.context_processors.media',
             ],
         },
