@@ -23,6 +23,7 @@ class CityDict(models.Model):
 class CourseOrg(models.Model):
     name = models.CharField(max_length=50, verbose_name=u'机构名称')
     desc = models.TextField(verbose_name=u'机构描述')
+    tag = models.CharField(default=u'全国知名', max_length=10, verbose_name=u'机构标签')
     category = models.CharField(max_length=20, choices=(('pxjg', u'培训机构'), ('gr', u'个人'), ('gx', u'高校')),
                                 default=u'pxjg', verbose_name=u'机构类别')
     click_nums = models.IntegerField(default=0, verbose_name=u'点击数')
@@ -37,6 +38,10 @@ class CourseOrg(models.Model):
     class Meta:
         verbose_name = u'课程机构'
         verbose_name_plural = verbose_name
+
+    def get_teacher_nums(self):
+        # 获取课程机构教师数
+        return self.teacher_set.all().count()
 
     def __unicode__(self):
         return self.name
@@ -60,3 +65,6 @@ class Teacher(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def get_course_nums(self):
+        return self.course_set.all().count()

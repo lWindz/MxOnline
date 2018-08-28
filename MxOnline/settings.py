@@ -28,7 +28,7 @@ SECRET_KEY = '3q5r+2ofi32$vy0vzk2y=t5)fe*zx&(c)+e-e#$b)g)dq86fuq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -51,7 +51,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'captcha',
     'pure_pagination',
+    'DjangoUeditor',
 ]
+
 AUTH_USER_MODEL = 'users.UserProfile'
 
 MIDDLEWARE = [
@@ -141,8 +143,6 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
@@ -166,6 +166,9 @@ EMAIL_USE_TLS = False
 # 配置媒体文件
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# 配置静态文件
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # 配置分页
 PAGINATION_SETTINGS = {

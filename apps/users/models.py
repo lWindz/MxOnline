@@ -25,11 +25,18 @@ class UserProfile(AbstractUser):
     def __unicode__(self):
         return self.username
 
+    def unread_nums(self):
+        # 获取用户未读消息的数量
+        # 该引用不能放在最上面，否则会出现循环引用
+        from operation.models import UserMessage
+        return UserMessage.objects.filter(user=self.id, has_read=False).count()
+
 
 class EmailVerifyRecord(models.Model):
     code = models.CharField(max_length=20, verbose_name=u'验证码')
     email = models.EmailField(max_length=50, verbose_name=u'邮箱')
-    send_type = models.CharField(max_length=10, choices=(('register', u'注册'), ('forget', u'找回密码')),
+    send_type = models.CharField(max_length=30,
+                                 choices=(('register', u'注册'), ('forget', u'找回密码'), ('update_email', u'修改邮箱')),
                                  verbose_name=u'验证码类型')
     send_time = models.DateTimeField(default=datetime.now, verbose_name=u'发送时间')
     # 记录邮件验证码是否失效

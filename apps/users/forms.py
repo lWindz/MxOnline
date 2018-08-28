@@ -5,6 +5,8 @@
 from captcha.fields import CaptchaField
 from django import forms
 
+from users.models import UserProfile
+
 
 class LoginForm(forms.Form):
     # username非空
@@ -30,3 +32,19 @@ class ForgetForm(forms.Form):
 class ModifyPwdForm(forms.Form):
     password1 = forms.CharField(required=True, min_length=5)
     password2 = forms.CharField(required=True, min_length=5)
+
+
+# 修改个人用户头像表单
+# 使用ModelForm，根据model自定义form
+class UploadImageForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['image']
+
+
+# 修改个人用户基本信息
+# 使用ModelForm，根据model自定义form
+class UserInfoForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['nick_name', 'gender', 'birday', 'address', 'mobile']
